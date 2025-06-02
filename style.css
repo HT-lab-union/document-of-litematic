@@ -1,0 +1,126 @@
+body {
+    background-color: #313131;
+    font-family: "Microsoft YaHei", "微软雅黑", "PingFang SC", "Noto Sans SC", "WenQuanYi Micro Hei", sans-serif;
+    color: white;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    width: 900px;
+    background-color: #6a6a6a;
+    text-align: center;
+    padding: 40px 20px;
+    border-radius: 20px;
+    font-size: 40px;
+    text-shadow: #313131 3px 3px 5px;
+    margin-top: 40px;
+    box-sizing: border-box;
+}
+
+.title p {
+    font-size: 20px;
+    margin-top: 10px;
+    font-weight: 500;
+}
+
+.search {
+    max-width: 900px;
+    width: 90%;
+    background-color: #6a6a6a;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 40px auto 60px;
+    box-sizing: border-box;
+}
+
+.search input {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    color: #222;
+}
+
+.search input::placeholder {
+    color: #bbb;
+}
+
+.search ul {
+    margin-top: 20px;
+    padding-left: 15px;
+    list-style: none;
+    max-height: 250px;
+    overflow-y: auto;
+    color: white;
+    border: 1px solid #444;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.search ul.loading::before {
+    content: "正在加载图纸，请稍候...";
+    display: block;
+    color: #ddd;
+    padding: 10px;
+    font-style: italic;
+    user-select: none;
+}
+
+#fileList li {
+    padding: 6px 12px;
+    border-bottom: 1px solid #555;
+}
+
+#fileList li a {
+    color: #7abaff;
+    text-decoration: none;
+}
+
+#fileList li a:hover {
+    text-decoration: underline;
+}
+
+#fileList li:hover {
+    background-color: #505050;
+}
+
+#pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+}
+
+#pagination button {
+    margin: 0 8px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background-color: #7abaff;
+    color: #222;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+#pagination button:hover:not(:disabled) {
+    background-color: #5596e6;
+}
+
+#pagination button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+#pagination span {
+    color: #ddd;
+    font-weight: 600;
+}
