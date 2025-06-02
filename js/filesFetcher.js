@@ -1,5 +1,5 @@
 // 负责从 GitHub API 递归抓取所有 .litematic 文件
-const API_URL = "https://api.github.com/repos/HT-lab-union/document-of-litematic/contents/schematic/";
+const API_URL = "https://api.github.com/repos/HT-lab-union/document-of-litematic/contents/contents/schematic/";
 
 let files = [];
 
