@@ -1,4 +1,4 @@
-fetch("https://你的worker域名或路径")
+fetch("https://https://schema.weizhihan3.workers.dev")
   .then(res => {
     if (!res.ok) throw new Error(`HTTP错误: ${res.status}`);
     return res.json();
