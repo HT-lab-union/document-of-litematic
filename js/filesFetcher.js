@@ -1,12 +1,10 @@
-fetch("https://schema.weizhihan3.workers.dev/list") //调用cf workers
-      .then(r => r.json())
-      .then(files => {
-        const container = document.getElementById("file-list");
-        container.innerHTML = "";
-        files.forEach(file => {
-          const div = document.createElement("div");
-          div.className = "item";
-          div.innerHTML = `<a href="${file.url}" download>${file.name}</a>`;
-          container.appendChild(div);
-        });
-      });
+fetch("https://schema.weizhihan3.workers.dev/")
+  .then(res => res.json())
+  .then(data => {
+    // 显示文件名
+    data.forEach(item => {
+      const li = document.createElement("li");
+      li.textContent = item.name;
+      document.querySelector("#list").appendChild(li);
+    });
+  });
