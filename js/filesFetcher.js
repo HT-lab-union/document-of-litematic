@@ -1,25 +1,12 @@
-// 负责从 GitHub API 递归抓取所有 .litematic 文件
-const WORKER_PROXY = "https://schema.weizhihan3.workers.dev/";
-
-const API_URL = "https://api.github.com/repos/HT-lab-union/document-of-litematic/contents/contents/schematic/";
-
-let files = [];
-
-async function fetchFiles(url, prefix = "") {
-    const res = await fetch(WORKER_PROXY + encodeURIComponent(url))
-    if (!res.ok) throw new Error("网络错误，无法获取文件列表");
-
-    const data = await res.json();
-
-    for (const item of data) {
-        if (item.type === "dir") {
-            await fetchFiles(item.url, prefix + item.name + "/");
-        } else if (item.name.endsWith(".litematic")) {
-            files.push({
-                name: item.name,
-                path: prefix + item.name,
-                url: item.download_url,
-            });
-        }
-    }
-}
+fetch("https://schema.weizhihan3.workers.dev/list") //调用cf workers
+      .then(r => r.json())
+      .then(files => {
+        const container = document.getElementById("file-list");
+        container.innerHTML = "";
+        files.forEach(file => {
+          const div = document.createElement("div");
+          div.className = "item";
+          div.innerHTML = `<a href="${file.url}" download>${file.name}</a>`;
+          container.appendChild(div);
+        });
+      });
