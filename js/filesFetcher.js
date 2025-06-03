@@ -1,11 +1,17 @@
-fetch("https://schema.weizhihan3.workers.dev/list")
-  .then(r => {
-    if (!r.ok) throw new Error(`HTTP错误: ${r.status}`);
-    return r.json();
+fetch("https://你的worker域名或路径")
+  .then(res => {
+    if (!res.ok) throw new Error(`HTTP错误: ${res.status}`);
+    return res.json();
   })
   .then(files => {
     const container = document.getElementById("file-list");
-    container.innerHTML = "";
+    container.innerHTML = ""; // 清空加载中
+
+    if (!files.length) {
+      container.textContent = "暂无文件";
+      return;
+    }
+
     files.forEach(file => {
       const div = document.createElement("div");
       div.className = "item";
