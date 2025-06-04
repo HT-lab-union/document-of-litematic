@@ -1,96 +1,22 @@
-fetch("https://fetch("https:// schema.weizhihan3.workers.dev)
-  .then(res => {
-    if (!res.ok) throw new Error(`HTTP错误: ${res.status}`);
-    return res.json();
-  })
-  .then(files => {
-    const container = document.getElementById("file-list");
-    container.innerHTML = "";
+// 负责从 GitHub API 递归抓取所有 .litematic 文件Add commentMore actions
+const API_URL = "https://api.github.com/repos/HT-lab-union/document-of-litematic/contents/contents/schematic/";
 
-    if (!files.length) {
-      container.textContent = "暂无文件";
-      return;
+let files = [];
+
+async function fetchFiles(url, prefix = "") {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("网络错误，无法获取文件列表");
+    const data = await res.json();
+
+    for (const item of data) {
+        if (item.type === "dir") {
+            await fetchFiles(item.url, prefix + item.name + "/");
+        } else if (item.name.endsWith(".litematic")) {
+            files.push({
+                name: item.name,
+                path: prefix + item.name,
+                url: item.download_url,
+            });
+        }
     }
-
-    files.forEach(file => {
-      // 注意给链接加 encodeURI 处理，防止空格等字符问题
-      const link = document.createElement("a");
-      link.href = encodeURI(file.url);
-      link.textContent = file.name;
-      link.download = ""; // 让浏览器识别为下载链接
-      link.target = "_blank"; // 新标签打开
-
-      const div = document.createElement("div");
-      div.className = "item";
-      div.appendChild(link);
-
-      container.appendChild(div);
-    });
-  })
-  .catch(err => {
-    document.getElementById("file-list").textContent = "加载失败：" + err.message;
-  });
-/list")
-  .then(res => {
-    if (!res.ok) throw new Error(`HTTP错误: ${res.status}`);
-    return res.json();
-  })
-  .then(files => {
-    const container = document.getElementById("file-list");
-    container.innerHTML = "";
-
-    if (!files.length) {
-      container.textContent = "暂无文件";
-      return;
-    }
-
-    files.forEach(file => {
-      // 注意给链接加 encodeURI 处理，防止空格等字符问题
-      const link = document.createElement("a");
-      link.href = encodeURI(file.url);
-      link.textContent = file.name;
-      link.download = ""; // 让浏览器识别为下载链接
-      link.target = "_blank"; // 新标签打开
-
-      const div = document.createElement("div");
-      div.className = "item";
-      div.appendChild(link);
-
-      container.appendChild(div);
-    });
-  })
-  .catch(err => {
-    document.getElementById("file-list").textContent = "加载失败：" + err.message;
-  });
-/list")
-  .then(res => {
-    if (!res.ok) throw new Error(`HTTP错误: ${res.status}`);
-    return res.json();
-  })
-  .then(files => {
-    const container = document.getElementById("file-list");
-    container.innerHTML = "";
-
-    if (!files.length) {
-      container.textContent = "暂无文件";
-      return;
-    }
-
-    files.forEach(file => {
-      // 注意给链接加 encodeURI 处理，防止空格等字符问题
-      const link = document.createElement("a");
-      link.href = encodeURI(file.url);
-      link.textContent = file.name;
-      link.download = ""; // 让浏览器识别为下载链接
-      link.target = "_blank"; // 新标签打开
-
-      const div = document.createElement("div");
-      div.className = "item";
-      div.appendChild(link);
-
-      container.appendChild(div);
-    });
-  })
-  .catch(err => {
-    document.getElementById("file-list").textContent = "加载失败：" + err.message;
-  });
+}
