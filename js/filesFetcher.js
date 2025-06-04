@@ -1,4 +1,4 @@
-// 负责从 GitHub API 递归抓取所有 .litematic 文件Add commentMore actions
+// 原 GitHub API URL
 const API_URL = "https://api.github.com/repos/HT-lab-union/document-of-litematic/contents/contents/schematic/";
 
 let files = [];
@@ -15,7 +15,8 @@ async function fetchFiles(url, prefix = "") {
             files.push({
                 name: item.name,
                 path: prefix + item.name,
-                url: item.download_url,
+                // 如果你想抄👇 将 download_url 替换为你 CF Workers 的代理地址
+                url: `https://schema.weizhihan3.workers.dev/${encodeURIComponent(prefix + item.name)}`
             });
         }
     }
