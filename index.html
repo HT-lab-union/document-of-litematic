@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-cn">
+<html lang="zh-cn" data-theme="dark" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>HT投影仓库</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 <div class="title">
@@ -15,6 +15,14 @@
     <input type="text" id="searchBox" placeholder="搜索图纸..." />
     <ul id="fileList" class="loading"></ul>
     <div id="pagination"></div>
+</div>
+
+<div class="theme_toggle">
+    <button id="浅色模式">浅色模式</button>
+    <script src="js/theme.js"></script>
+    <a href="english/index_en.html"><button>English</button></a>
+        <a href="https://github.com/HT-lab-union/document-of-litematic" target="_blank"><button>GitHub
+        </button></a>
 </div>
 
 <script src="js/filesFetcher.js"></script>
