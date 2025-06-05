@@ -1,7 +1,33 @@
+:root {
+    --bg-color: #313131;
+    --text-color: white;
+    --title-bg: #6a6a6a;
+    --input-bg: #fff;
+    --input-text: #222;
+    --list-hover: #505050;
+    --link-color: #7abaff;
+    --pagination-bg: #7abaff;
+    --pagination-hover: #5596e6;
+    --pagination-info: #ddd;
+}
+
+html[data-theme="light"] {
+    --bg-color: #FAE6B9;
+    --text-color: #17202a;
+    --title-bg: #FFFDD0;
+    --input-bg: #f7dc6f;
+    --input-text: #000;
+    --list-hover: #f0f0f0;
+    --link-color: #154360;
+    --pagination-bg: #154360;
+    --pagination-hover: #005fa3;
+    --pagination-info: #333;
+}
+
 body {
-    background-color: #313131;
+    background-color: var(--bg-color);
     font-family: "Microsoft YaHei", "微软雅黑", "PingFang SC", "Noto Sans SC", "WenQuanYi Micro Hei", sans-serif;
-    color: white;
+    color: var(--text-color);
     margin: 0;
     min-height: 100vh;
     display: flex;
@@ -12,7 +38,7 @@ body {
 
 .title {
     width: 900px;
-    background-color: #6a6a6a;
+    background-color: var(--title-bg);
     text-align: center;
     padding: 40px 20px;
     border-radius: 20px;
@@ -31,7 +57,7 @@ body {
 .search {
     max-width: 900px;
     width: 90%;
-    background-color: #6a6a6a;
+    background-color: var(--title-bg);
     border-radius: 20px;
     padding: 20px;
     margin: 40px auto 60px;
@@ -46,7 +72,8 @@ body {
     border: none;
     outline: none;
     box-sizing: border-box;
-    color: #222;
+    color: var(--input-text);
+    background-color: var(--input-bg);
 }
 
 .search input::placeholder {
@@ -59,8 +86,8 @@ body {
     list-style: none;
     max-height: 250px;
     overflow-y: auto;
-    color: white;
-    border: 1px solid #444;
+    color: var(--text-color);
+    border: none;
     border-radius: 10px;
     box-sizing: border-box;
 }
@@ -68,7 +95,7 @@ body {
 .search ul.loading::before {
     content: "正在加载图纸，请稍候...";
     display: block;
-    color: #ddd;
+    color: var(--pagination-info);
     padding: 10px;
     font-style: italic;
     user-select: none;
@@ -80,16 +107,16 @@ body {
 }
 
 #fileList li a {
-    color: #7abaff;
+    color: var(--link-color);
     text-decoration: none;
 }
 
 #fileList li a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 #fileList li:hover {
-    background-color: #505050;
+    background-color: var(--list-hover);
 }
 
 #pagination {
@@ -102,17 +129,17 @@ body {
 #pagination button {
     margin: 0 8px;
     padding: 6px 12px;
-    border-radius: 6px;
+    border-radius: 0;
     border: none;
     cursor: pointer;
-    background-color: #7abaff;
-    color: #222;
+    background-color: var(--pagination-bg);
+    color: var(--input-text);
     font-weight: 600;
     transition: background-color 0.3s ease;
 }
 
 #pagination button:hover:not(:disabled) {
-    background-color: #5596e6;
+    background-color: var(--pagination-hover);
 }
 
 #pagination button:disabled {
@@ -121,6 +148,29 @@ body {
 }
 
 #pagination span {
-    color: #ddd;
+    color: var(--pagination-info);
     font-weight: 600;
+}
+
+body.light {
+    background: #fff;
+    color: #000;
+}
+
+.theme_toggle {
+    display: flex;
+    justify-content: center; 
+    align-items: center;     
+    gap: 20px;               
+}
+
+.theme_toggle button {
+    color: var(--text-color);
+    background-color: var(--title-bg);
+    border: none;
+    outline: none;
+    cursor: row-resize;
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
 }
