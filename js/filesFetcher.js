@@ -1,5 +1,5 @@
-// 原 GitHub API URL
-const API_URL = "https://api.github.com/repos/HT-lab-union/document-of-litematic/contents/contents/schematic/";
+// 这里的 URL 是你 CF Workers 的endpoint
+const API_URL = "https://schema.weizhihan3.workers.dev/contents/schematic/";
 
 let files = [];
 
