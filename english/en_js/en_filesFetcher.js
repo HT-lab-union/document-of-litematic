@@ -1,5 +1,5 @@
-// Original GitHub API URL
-const API_URL = "https://api.github.com/repos/HT-lab-union/document-of-litematic/contents/contents/schematic/";
+// This is the URL of your CF Workers endpoint
+const API_URL = "https://schema.weizhihan3.workers.dev/contents/schematic/";
 
 let files = [];
 
