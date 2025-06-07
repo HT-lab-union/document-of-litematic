@@ -1,4 +1,4 @@
-const API_URL = "https://github-schema.weizhihan3.workers.dev/contents/contents/schematic/";
+const API_URL = "https://github-schema.weizhihan3.workers.dev/api";
 
 let files = [];
 
