@@ -1,4 +1,4 @@
-űasync function fetchFiles() {
+async function fetchFiles() {
   const res = await fetch('https://github-schema.weizhihan3.workers.dev/contents/contents/schematic/');
   const data = await res.json();
   const ul = document.getElementById('file-list');
