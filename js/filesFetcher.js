@@ -1,22 +1,17 @@
-async function fetchFiles() {
-  const res = await fetch('https://github-schema.weizhihan3.workers.dev/contents/contents/schematic/');
-  const data = await res.json();
-  const ul = document.getElementById('file-list');
-  ul.innerHTML = '';
+let files = [];
 
-  data.forEach(file => {
-    if (file.name.endsWith('.litematic') || file.name.endsWith('.zip')) {
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      // 这里要带完整目录路径，和 Worker 中对应
-      const filePath = 'contents/schematic/' + file.name;
-      a.href = `https://github-schema.weizhihan3.workers.dev/${encodeURIComponent(filePath)}`;
-      a.textContent = file.name;
-      a.download = file.name;
-      li.appendChild(a);
-      ul.appendChild(li);
-    }
-  });
+async function fetchFiles(apiUrl) {
+    const res = await fetch(apiUrl);
+    const data = await res.json();
+
+    files = [];
+    data.forEach(item => {
+        if (item.name.endsWith('.litematic') || item.name.endsWith('.zip')) {
+            files.push({
+                name: item.name,
+                path: item.name,
+                url: `https://github-schema.weizhihan3.workers.dev/${encodeURIComponent(item.name)}`
+            });
+        }
+    });
 }
-
-window.onload = fetchFiles;
