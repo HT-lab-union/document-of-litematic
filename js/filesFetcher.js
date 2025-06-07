@@ -1,4 +1,4 @@
-async function fetchFiles() {
+űasync function fetchFiles() {
   const res = await fetch('https://github-schema.weizhihan3.workers.dev/contents/contents/schematic/');
   const data = await res.json();
   const ul = document.getElementById('file-list');
@@ -8,7 +8,9 @@ async function fetchFiles() {
     if (file.name.endsWith('.litematic') || file.name.endsWith('.zip')) {
       const li = document.createElement('li');
       const a = document.createElement('a');
-      a.href = `https://github-schema.weizhihan3.workers.dev/${encodeURIComponent(file.name)}`;
+      // 这里要带完整目录路径，和 Worker 中对应
+      const filePath = 'contents/schematic/' + file.name;
+      a.href = `https://github-schema.weizhihan3.workers.dev/${encodeURIComponent(filePath)}`;
       a.textContent = file.name;
       a.download = file.name;
       li.appendChild(a);
