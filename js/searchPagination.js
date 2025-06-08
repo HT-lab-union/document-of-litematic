@@ -35,7 +35,6 @@ function renderPage() {
         const a = document.createElement("a");
         a.href = file.url;         // ✅ 使用 CF Worker 提供的链接
         a.textContent = file.name;
-        a.target = "_blank";
         a.download = file.name;    // ✅ 下载触发
         li.appendChild(a);
         fileList.appendChild(li);
