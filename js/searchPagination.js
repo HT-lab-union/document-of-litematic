@@ -1,5 +1,5 @@
 // 负责分页、搜索、渲染文件列表和分页按钮
-const API_URL = "https://github-schema.weizhihan3.workers.dev/contents/contents/schematic/";
+
 const fileList = document.getElementById("file-list");
 const pagination = document.getElementById("pagination");
 const searchBox = document.getElementById("searchBox");
@@ -8,12 +8,14 @@ let currentFiles = [];
 let currentPage = 1;
 const filesPerPage = 10;
 
+// 入口：更新当前展示列表
 function updateList(list) {
     currentFiles = list;
     currentPage = 1;
     renderPage();
 }
 
+// 渲染当前页文件
 function renderPage() {
     fileList.classList.remove("loading");
     fileList.innerHTML = "";
@@ -31,10 +33,10 @@ function renderPage() {
     for (const file of pageFiles) {
         const li = document.createElement("li");
         const a = document.createElement("a");
-        a.href = file.url;
-        a.textContent = file.path;
+        a.href = file.url;         // ✅ 使用 CF Worker 提供的链接
+        a.textContent = file.name;
         a.target = "_blank";
-        a.download = "";
+        a.download = file.name;    // ✅ 下载触发
         li.appendChild(a);
         fileList.appendChild(li);
     }
@@ -42,6 +44,7 @@ function renderPage() {
     renderPaginationControls();
 }
 
+// 分页控制
 function renderPaginationControls() {
     pagination.innerHTML = "";
 
@@ -72,20 +75,21 @@ function renderPaginationControls() {
     pagination.appendChild(nextBtn);
 }
 
+// 搜索事件
 searchBox.addEventListener("input", (e) => {
     const keyword = e.target.value.trim().toLowerCase();
     if (!keyword) {
         updateList(files);
     } else {
-        const filtered = files.filter((f) => f.path.toLowerCase().includes(keyword));
+        const filtered = files.filter((f) => f.name.toLowerCase().includes(keyword));
         updateList(filtered);
     }
 });
 
-// 初始化入口
+// ✅ 页面初始化
 (async function init() {
     try {
-        await fetchFiles(API_URL);
+        await fetchFiles();
         updateList(files);
     } catch (e) {
         fileList.classList.remove("loading");
