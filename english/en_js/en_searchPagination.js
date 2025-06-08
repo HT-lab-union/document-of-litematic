@@ -74,7 +74,7 @@ function renderPaginationControls() {
     pagination.appendChild(nextBtn);
 }
 
-// search event
+// searchbox
 searchBox.addEventListener("input", (e) => {
     const keyword = e.target.value.trim().toLowerCase();
     if (!keyword) {
