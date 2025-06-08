@@ -37,14 +37,15 @@ body {
 }
 
 .title {
-    width: 900px;
+    max-width: 900px;
+    width: 90%;
     background-color: var(--title-bg);
     text-align: center;
     padding: 40px 20px;
     border-radius: 20px;
     font-size: 40px;
     text-shadow: #313131 3px 3px 5px;
-    margin-top: 40px;
+    margin: 40px auto 60px;
     box-sizing: border-box;
 }
 
