@@ -101,21 +101,21 @@ body {
     user-select: none;
 }
 
-#fileList li {
+#file-list li {
     padding: 6px 12px;
     border-bottom: 1px solid #555;
 }
 
-#fileList li a {
+#file-list li a {
     color: var(--link-color);
     text-decoration: none;
 }
 
-#fileList li a:hover {
+#file-list li a:hover {
     text-decoration: none;
 }
 
-#fileList li:hover {
+#file-list li:hover {
     background-color: var(--list-hover);
 }
 
@@ -159,12 +159,10 @@ body.light {
 
 .theme_toggle {
     display: flex;
-    justify-content: center; /* 水平居中 */
-    align-items: center;     /* 垂直居中 */
-    gap: 20px;               /* 按钮之间间距 */
-    /* 如果需要宽度限制，可加宽度 */
-    /* width: 200px; */
-    /* margin: 0 auto; */
+    justify-content: center; 
+    align-items: center;     
+    gap: 20px;              
+    
 }
 
 .theme_toggle button {
@@ -176,7 +174,4 @@ body.light {
     width: 100px;
     height: 40px;
     border-radius: 20px;
-    /* 去掉left和position */
-    /* left: -100px; */
-    /* position: relative; */
 }
