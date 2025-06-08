@@ -101,21 +101,21 @@ body {
     user-select: none;
 }
 
-#fileList li {
+#file-list li {
     padding: 6px 12px;
     border-bottom: 1px solid #555;
 }
 
-#fileList li a {
+#file-list li a {
     color: var(--link-color);
     text-decoration: none;
 }
 
-#fileList li a:hover {
+#file-list li a:hover {
     text-decoration: none;
 }
 
-#fileList li:hover {
+#file-list li:hover {
     background-color: var(--list-hover);
 }
 
