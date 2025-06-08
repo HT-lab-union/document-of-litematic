@@ -1,5 +1,6 @@
 // 负责分页、搜索、渲染文件列表和分页按钮
-const fileList = document.getElementById("fileList");
+const API_URL = "https://github-schema.weizhihan3.workers.dev/contents/contents/schematic/";
+const fileList = document.getElementById("file-list");
 const pagination = document.getElementById("pagination");
 const searchBox = document.getElementById("searchBox");
 

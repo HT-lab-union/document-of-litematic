@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // 这里的 URL 是你 CF Workers 的endpoint
 const API_URL = "https://schema.weizhihan3.workers.dev/contents/schematic/";
 
@@ -26,6 +27,20 @@ async function fetchFiles(url, prefix = "") {
         if (fileList) {
             fileList.classList.remove('loading');
             fileList.innerHTML = `<li style="color:red;">加载失败：${error.message}</li>`;
+=======
+async function fetchFiles(apiUrl) {
+    const res = await fetch(apiUrl);
+    const data = await res.json();
+    files = [];
+
+    data.forEach(item => {
+        if (item.name.endsWith('.litematic') || item.name.endsWith('.zip')) {
+            files.push({
+                name: item.name,
+                path: item.name,
+                url: `https://github-schema.weizhihan3.workers.dev/${encodeURIComponent(item.name)}`
+            });
+>>>>>>> main
         }
-    }
+    });
 }
