@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
 <head>
+    <link href="image/icon.png" rel="icon" type="image/x-icon" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>HT schema storage</title>
@@ -13,18 +14,18 @@
 </div>
 <div class="search">
     <input type="text" id="searchBox" placeholder="Search..." />
-    <ul id="fileList" class="loading"></ul>
+    <ul id="file-list" class="loading"></ul>
     <div id="pagination"></div>
 </div>
 
 <div class="theme_toggle">
     <button id="light mode">light mode</button>
+    <script src="en_js/en_theme.js"></script>
     <a href="../index.html"><button>中文</button></a>
     <a href="https://github.com/HT-lab-union/document-of-litematic" target="_blank"><button>GitHub
     </button></a>
 </div>
 
-<script src="en_js/en_theme.js"></script>
 <script src="en_js/en_filesFetcher.js"></script>
 <script src="en_js/en_searchPagination.js"></script>
 </body>
