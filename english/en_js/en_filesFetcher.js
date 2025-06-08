@@ -1,23 +1,15 @@
-// This is the URL of your CF Workers endpoint
-const API_URL = "https://schema.weizhihan3.workers.dev/contents/schematic/";
-
-let files = [];
-
-async function fetchFiles(url, prefix = "") {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error("Network Error");
+async function fetchFiles(apiUrl) {
+    const res = await fetch(apiUrl);
     const data = await res.json();
+    files = [];
 
-    for (const item of data) {
-        if (item.type === "dir") {
-            await fetchFiles(item.url, prefix + item.name + "/");
-        } else if (item.name.endsWith(".litematic")) {
+    data.forEach(item => {
+        if (item.name.endsWith('.litematic') || item.name.endsWith('.zip')) {
             files.push({
                 name: item.name,
-                path: prefix + item.name,
-                // Cloudflare workers
-                url: `https://schema.weizhihan3.workers.dev/${encodeURIComponent(prefix + item.name)}`
+                path: item.name,
+                url: `https://github-schema.weizhihan3.workers.dev/${encodeURIComponent(item.name)}`
             });
         }
-    }
+    });
 }

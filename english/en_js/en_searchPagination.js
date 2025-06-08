@@ -1,4 +1,5 @@
 // shader next page, pages, and page count
+const API_URL = "https://github-schema.weizhihan3.workers.dev/contents/contents/schematic/";
 const fileList = document.getElementById("fileList");
 const pagination = document.getElementById("pagination");
 const searchBox = document.getElementById("searchBox");
