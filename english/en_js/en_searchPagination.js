@@ -1,6 +1,6 @@
-// shader next page, pages, and page count
-const API_URL = "https://github-schema.weizhihan3.workers.dev/contents/contents/schematic/";
-const fileList = document.getElementById("fileList");
+// for pages function, searching function
+
+const fileList = document.getElementById("file-list");
 const pagination = document.getElementById("pagination");
 const searchBox = document.getElementById("searchBox");
 
@@ -8,12 +8,14 @@ let currentFiles = [];
 let currentPage = 1;
 const filesPerPage = 10;
 
+// update list view
 function updateList(list) {
     currentFiles = list;
     currentPage = 1;
     renderPage();
 }
 
+// shader current page
 function renderPage() {
     fileList.classList.remove("loading");
     fileList.innerHTML = "";
@@ -31,10 +33,9 @@ function renderPage() {
     for (const file of pageFiles) {
         const li = document.createElement("li");
         const a = document.createElement("a");
-        a.href = file.url;
-        a.textContent = file.path;
-        a.target = "_blank";
-        a.download = "";
+        a.href = file.url;         // ✅ CF Worker supply url
+        a.textContent = file.name;
+        a.download = file.name;    // ✅ dowload
         li.appendChild(a);
         fileList.appendChild(li);
     }
@@ -42,6 +43,7 @@ function renderPage() {
     renderPaginationControls();
 }
 
+// 分页控制
 function renderPaginationControls() {
     pagination.innerHTML = "";
 
@@ -65,31 +67,32 @@ function renderPaginationControls() {
     };
 
     const pageInfo = document.createElement("span");
-    pageInfo.textContent = `  ${currentPage}  /  ${totalPages}  `;
+    pageInfo.textContent = ` page${currentPage}  / total ${totalPages}  `;
 
     pagination.appendChild(prevBtn);
     pagination.appendChild(pageInfo);
     pagination.appendChild(nextBtn);
 }
 
+// search event
 searchBox.addEventListener("input", (e) => {
     const keyword = e.target.value.trim().toLowerCase();
     if (!keyword) {
         updateList(files);
     } else {
-        const filtered = files.filter((f) => f.path.toLowerCase().includes(keyword));
+        const filtered = files.filter((f) => f.name.toLowerCase().includes(keyword));
         updateList(filtered);
     }
 });
 
-// 初始化入口
+// ✅ page loading
 (async function init() {
     try {
-        await fetchFiles(API_URL);
+        await fetchFiles();
         updateList(files);
     } catch (e) {
         fileList.classList.remove("loading");
-        fileList.innerHTML = "<li>Loading failed! Check your internet connection!</li>";
+        fileList.innerHTML = "<li>Failed to load files! Please refresh the tab and try again.</li>";
         console.error(e);
     }
 })();
