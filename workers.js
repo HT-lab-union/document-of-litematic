@@ -2,9 +2,9 @@
 //This is a template javascript doc for help you add token proxy to cloudflare workers
 const GITHUB_TOKEN = 'ghp_example';  // github token
 
-const REPO_OWNER = 'HT-lab-union';
-const REPO_NAME = 'document-of-litematic';
-const BASE_PATH = 'contents/schematic';
+const REPO_OWNER = 'HT-lab-union'; //项目拥有者，如果挂在organization下就写organization的名称/ #Repo owner, if repo is under organization use organization name
+const REPO_NAME = 'document-of-litematic'; //仓库名称 /# repo name
+const BASE_PATH = 'contents/schematic'; //要检测的文件位置 /# File locations to detect
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',  // aggre all origins/允许所有 origins
