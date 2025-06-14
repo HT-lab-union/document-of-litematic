@@ -5,6 +5,8 @@ const GITHUB_TOKEN = 'ghp_example';  // github token
 const REPO_OWNER = 'HT-lab-union'; //项目拥有者，如果挂在organization下就写organization的名称/ #Repo owner, if repo is under organization use organization name
 const REPO_NAME = 'document-of-litematic'; //仓库名称 /# repo name
 const BASE_PATH = 'contents/schematic'; //要检测的文件位置 /# File locations to detect
+const CACHE_KEY = 'file_list_cache'; // 缓存键名 /# Cache key name
+const CACHE_TTL = 86400; // 缓存时间，单位为秒 /# Cache time in seconds (1Day = 86400 seconds)
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',  // aggre all origins/允许所有 origins
@@ -38,7 +40,6 @@ async function fetchFilesRecursively(path, host) {
   }
 
   const data = await res.json();
-
   let results = [];
 
   for (const item of data) {
@@ -84,7 +85,17 @@ async function handleRequest(event) {
     });
   }
   
-  
+  //文件列表缓存逻辑 /# File list cache logic
+  // 检查缓存是否存在，如果存在则直接返回缓存内容 /# Check if cache exists, if so return cached content directly
+  const kv = event.env.FILES_KV;
+  let cached = await kv.get(CACHE_KEY, 'json');
+  if (cached) {
+    // 如果缓存存在，直接返回缓存内容 /# If cache exists, return cached content directly
+    return new Response(JSON.stringify(cached), {
+      status: 200,
+      headers: corsHeaders,
+    });
+  }
 
   // 返回文件列表 JSON/ #Return doclist JSON
   try {
@@ -101,3 +112,12 @@ async function handleRequest(event) {
     });
   }
 }
+
+
+// 注意：/# Important:
+// 需要在 Cloudflare Workers 的 wragler.toml 里绑定 KV 命名空间为 “FILES_KV”
+// Make sure to bind the KV namespace "FILES_KV" in wrangler.toml
+
+// [[kv_namespaces]]
+// binding = "FILES_KV"
+// id = "your-kv-namespace-id"
